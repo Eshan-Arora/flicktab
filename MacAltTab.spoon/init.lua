@@ -494,10 +494,6 @@ function M:start()
     {title=self.enabled and 'Disable (restore macOS Command–Tab)' or 'Enable', fn=function() self:setEnabled(not self.enabled) end},
     {title='Cancel current switch', fn=function() self:finish(false) end},
   } end)
-  self.toggle = hs.hotkey.bind({'ctrl','alt','cmd'}, 'S', function()
-    self:setEnabled(not self.enabled)
-    hs.alert.show(self.enabled and 'Window search enabled' or 'Window search disabled')
-  end)
   self:setEnabled(hs.settings.get('MacAltTab.enabled') ~= false)
   self.screenWatcher = hs.screen.watcher.new(function()
     if self.active then self:render() end
@@ -519,7 +515,6 @@ function M:stop()
   if self.tap then self.tap:stop(); self.tap = nil end
   if self.watchdog then self.watchdog:stop(); self.watchdog = nil end
   if self.screenWatcher then self.screenWatcher:stop(); self.screenWatcher = nil end
-  if self.toggle then self.toggle:delete(); self.toggle = nil end
   if self.menu then self.menu:delete(); self.menu = nil end
   if self.filter then self.filter:delete(); self.filter = nil end
   self.enabled, self.consumed = false, {}

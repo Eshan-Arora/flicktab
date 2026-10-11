@@ -14,15 +14,9 @@ Clone or download this repo, then run:
 ./setup
 ```
 
-This installs Hammerspoon through Homebrew if needed, copies the switcher, and adds its startup line to your config. Existing config is backed up and preserved. Without Homebrew, [install Hammerspoon](https://www.hammerspoon.org) first.
+Setup works with new or existing Hammerspoon installations: it copies the Spoon and adds its startup line automatically, backing up and preserving your existing config. It installs Hammerspoon through Homebrew if needed. Without Homebrew, [install Hammerspoon](https://www.hammerspoon.org) first.
 
 Allow Hammerspoon in **System Settings → Privacy & Security → Accessibility**, then choose **Reload Config** from its menu.
-
-Already use Spoons? Copy `MacAltTab.spoon` into `~/.hammerspoon/Spoons/` and add this to `init.lua`:
-
-```lua
-hs.loadSpoon("MacAltTab"):start()
-```
 
 ## Controls
 
@@ -33,7 +27,6 @@ hs.loadSpoon("MacAltTab"):start()
 | Type while holding Command | Search |
 | Release Command / Enter | Switch |
 | Escape | Cancel |
-| Control + Option + Command + S | Enable / disable |
 
 Disable it from the **⌘⇥** menu to restore normal Command-Tab. To uninstall, remove its startup line and `MacAltTab.spoon`, then reload Hammerspoon.
 
