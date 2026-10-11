@@ -1,2 +1,40 @@
-# mac-alt-tab-switcher
-A searchable macOS window switcher built with Hammerspoon.
+# Mac Alt-Tab Switcher
+
+A searchable window switcher for macOS, built with [Hammerspoon](https://www.hammerspoon.org).
+
+Hold **Command**, press **Tab**, and type to filter by app or window title. Release Command to switch. Windows appear in recent-use order; search handles abbreviations and typos.
+
+![Mac Alt-Tab Switcher with example windows](assets/switcher.png)
+
+## Install
+
+Clone or download this repo, then run:
+
+```sh
+./setup
+```
+
+This installs Hammerspoon through Homebrew if needed, copies the switcher, and adds its startup line to your config. Existing config is backed up and preserved. Without Homebrew, [install Hammerspoon](https://www.hammerspoon.org) first.
+
+Allow Hammerspoon in **System Settings → Privacy & Security → Accessibility**, then choose **Reload Config** from its menu.
+
+Already use Spoons? Copy `MacAltTab.spoon` into `~/.hammerspoon/Spoons/` and add this to `init.lua`:
+
+```lua
+hs.loadSpoon("MacAltTab"):start()
+```
+
+## Controls
+
+| Key | Action |
+| --- | --- |
+| Command + Tab | Open / next window |
+| Command + Shift + Tab | Previous window |
+| Type while holding Command | Search |
+| Release Command / Enter | Switch |
+| Escape | Cancel |
+| Control + Option + Command + S | Enable / disable |
+
+Disable it from the **⌘⇥** menu to restore normal Command-Tab. To uninstall, remove its startup line and `MacAltTab.spoon`, then reload Hammerspoon.
+
+The switcher runs locally: no network requests, saved searches, or saved window titles. It pauses while macOS Secure Input is active. Use one Command-Tab replacement at a time.
