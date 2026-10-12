@@ -1,13 +1,13 @@
 -- Hold Command throughout: Tab, type, Tab/Shift-Tab, release Command.
 -- No network, subprocesses, saved queries, or saved window titles.
 local M = {
-  name = 'MacAltTab', version = '0.1.0', author = 'Eshan Arora',
-  homepage = 'https://github.com/Eshan-Arora/mac-alt-tab-switcher',
+  name = 'FlickTab', version = '0.1.0', author = 'Eshan Arora',
+  homepage = 'https://github.com/Eshan-Arora/flicktab',
   active = false, enabled = false, consumed = {},
 }
 local types = hs.eventtap.event.types
 local keys = hs.keycodes.map
-local log = hs.logger.new('MacAltTab', 'warning')
+local log = hs.logger.new('FlickTab', 'warning')
 
 -- Control Center exposes its temporary panels to Accessibility as standard
 -- windows, but their window IDs disappear as soon as the panel is dismissed.
@@ -467,7 +467,7 @@ end
 function M:setEnabled(enabled)
   self:finish(false)
   self.enabled, self.consumed = enabled, {}
-  hs.settings.set('MacAltTab.enabled', enabled)
+  hs.settings.set('FlickTab.enabled', enabled)
   if enabled and hs.accessibilityState() then self.tap:start() else self.tap:stop() end
   self.menu:setTitle(enabled and (hs.accessibilityState() and '⌘⇥' or '⌘⇥ !') or '⌘⇥ off')
 end
@@ -490,11 +490,11 @@ function M:start()
     return consumed
   end)
   self.menu = hs.menubar.new():setMenu(function() return {
-    {title='Mac Alt-Tab Switcher', disabled=true},
+    {title='FlickTab', disabled=true},
     {title=self.enabled and 'Disable (restore macOS Command–Tab)' or 'Enable', fn=function() self:setEnabled(not self.enabled) end},
     {title='Cancel current switch', fn=function() self:finish(false) end},
   } end)
-  self:setEnabled(hs.settings.get('MacAltTab.enabled') ~= false)
+  self:setEnabled(hs.settings.get('FlickTab.enabled') ~= false)
   self.screenWatcher = hs.screen.watcher.new(function()
     if self.active then self:render() end
   end):start()

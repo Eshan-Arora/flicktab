@@ -2,16 +2,16 @@
 set -euo pipefail
 
 if [[ "$(uname -s)" != Darwin ]]; then
-  echo 'Mac Alt-Tab Switcher requires macOS.' >&2
+  echo 'FlickTab requires macOS.' >&2
   exit 1
 fi
 
 project_dir="$(cd "$(dirname "$0")" && pwd)"
 config_dir="${HAMMERSPOON_CONFIG_DIR:-$HOME/.hammerspoon}"
 init_file="$config_dir/init.lua"
-spoon_dir="$config_dir/Spoons/MacAltTab.spoon"
-marker='-- Mac Alt-Tab Switcher'
-loader='hs.loadSpoon("MacAltTab"):start()'
+spoon_dir="$config_dir/Spoons/FlickTab.spoon"
+marker='-- FlickTab'
+loader='hs.loadSpoon("FlickTab"):start()'
 
 if [[ -e "$init_file" ]] && grep -Eq "require[[:space:]]*\\(?[[:space:]]*['\"]search_switcher['\"]" "$init_file"; then
   echo "Remove the old search_switcher startup lines from $init_file first; keep your other scripts." >&2
@@ -36,11 +36,11 @@ if [[ -L "$spoon_dir" || -L "$spoon_dir/init.lua" ]]; then
   echo "Refusing to overwrite a symlink at $spoon_dir. Remove it manually if you want a copied installation." >&2
   exit 1
 fi
-backup_dir="$(mktemp -d "$config_dir/mac-alt-tab-backup.XXXXXX")"
+backup_dir="$(mktemp -d "$config_dir/flicktab-backup.XXXXXX")"
 if [[ -e "$init_file" ]]; then cp -pL "$init_file" "$backup_dir/init.lua"; fi
-if [[ -e "$spoon_dir" ]]; then cp -Rp "$spoon_dir" "$backup_dir/MacAltTab.spoon"; fi
+if [[ -e "$spoon_dir" ]]; then cp -Rp "$spoon_dir" "$backup_dir/FlickTab.spoon"; fi
 mkdir -p "$spoon_dir"
-cp "$project_dir/MacAltTab.spoon/init.lua" "$spoon_dir/init.lua"
+cp "$project_dir/FlickTab.spoon/init.lua" "$spoon_dir/init.lua"
 if [[ ! -e "$init_file" ]] || ! grep -Fxq "$loader" "$init_file"; then
   printf '\n%s\n%s\n' "$marker" "$loader" >> "$init_file"
 fi
@@ -48,4 +48,4 @@ fi
 echo "Installed. Backup: $backup_dir"
 open -a Hammerspoon
 echo 'Allow Hammerspoon in System Settings → Privacy & Security → Accessibility.'
-echo 'Then choose Reload Config from the Hammerspoon menu. Hold Command and press Tab to switch.'
+echo 'Then click Reload Config from the Hammerspoon menu. Hold Command and press Tab to switch.'

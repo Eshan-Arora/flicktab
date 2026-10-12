@@ -1,6 +1,6 @@
--- Run in the Hammerspoon Console: dofile('/path/to/mac-alt-tab-switcher/tests/run.lua')
+-- Run in the Hammerspoon Console: dofile('/path/to/flicktab/tests/run.lua')
 local root = debug.getinfo(1, 'S').source:sub(2):match('^(.*)/tests/run.lua$')
-local switcher = dofile(root .. '/MacAltTab.spoon/init.lua')
+local switcher = dofile(root .. '/FlickTab.spoon/init.lua')
 local count = 0
 local function check(value, message)
   assert(value, message)
@@ -60,5 +60,5 @@ hs.window.focusedWindow = originalFocus
 hs.eventtap.isSecureInputEnabled = originalSecure
 hs.screen.allScreens = originalScreens
 assert(ok, err)
-print('MacAltTab: '..count..' regression checks passed')
+print('FlickTab: '..count..' regression checks passed')
 return count

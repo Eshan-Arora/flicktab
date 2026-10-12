@@ -1,33 +1,46 @@
-# Mac Alt-Tab Switcher
+# FlickTab
 
-A searchable window switcher for macOS, built with [Hammerspoon](https://www.hammerspoon.org).
+A searchable window switcher for macOS, built with [Hammerspoon](https://www.hammerspoon.org). Enables Windows-like switching instead of Mac application-level switching.
 
-Hold **Command**, press **Tab**, and type to filter by app or window title. Release Command to switch. Windows appear in recent-use order; search handles abbreviations and typos.
+Hold **Command**, press **Tab** to cycle, and release at the desired window. Windows appear in most-recently-used order.
 
-![Mac Alt-Tab Switcher with example windows](assets/switcher.png)
+Typical usage pattern looks like either:
+
+- Switching back and forth between 2 windows
+- Search for a window you know is open, but don't know where in the order. i.e. type "obs" for obsidian or "gh" for ghostty.
+
+![FlickTab showing two separate Google Chrome windows](assets/switcher.png)
+
+## Comparison
+
+Many similar tools exist. What makes FlickTab the best:
+
+- **Fast:** Never feel lag
+- **Fuzzy search:** Super resillient to typos
+- **Uses Hammerspoon:** No separate app. Company managed Macs just need to allow Hammerspoon
+- **Simple:** in both design and features
+- **Free**
 
 ## Install
 
-Clone or download this repo, then run:
+Clone repo, then run:
 
 ```sh
 ./setup
 ```
 
-Setup works with new or existing Hammerspoon installations: it copies the Spoon and adds its startup line automatically, backing up and preserving your existing config. It installs Hammerspoon through Homebrew if needed. Without Homebrew, [install Hammerspoon](https://www.hammerspoon.org) first.
+Setup installs Hammerspoon with homebrew if not already installed, copies the Spoon, and adds its startup line.
 
-Allow Hammerspoon in **System Settings → Privacy & Security → Accessibility**, then choose **Reload Config** from its menu.
+Allow Hammerspoon in **System Settings → Privacy & Security → Accessibility**, then click **Reload Config** from its menu.
 
 ## Controls
 
-| Key | Action |
-| --- | --- |
-| Command + Tab | Open / next window |
-| Command + Shift + Tab | Previous window |
-| Type while holding Command | Search |
-| Release Command / Enter | Switch |
-| Escape | Cancel |
+| Key                        | Action             |
+| -------------------------- | ------------------ |
+| Command + Tab              | Open / next window |
+| Command + Shift + Tab      | Previous window    |
+| Type while holding Command | Search             |
+| Release Command / Enter    | Switch             |
+| Escape                     | Cancel             |
 
-Disable it from the **⌘⇥** menu to restore normal Command-Tab. To uninstall, remove its startup line and `MacAltTab.spoon`, then reload Hammerspoon.
-
-The switcher runs locally: no network requests, saved searches, or saved window titles. It pauses while macOS Secure Input is active. Use one Command-Tab replacement at a time.
+To uninstall, remove its startup line and `FlickTab.spoon`.

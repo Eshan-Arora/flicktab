@@ -40,10 +40,10 @@ class SetupTests(unittest.TestCase):
         self.run_setup()
         self.run_setup()
         self.assertTrue(init.read_text().startswith(initial + '\n'))
-        self.assertEqual(init.read_text().count('hs.loadSpoon("MacAltTab"):start()'), 1)
-        self.assertTrue(any(p.read_text() == initial for p in self.config.glob('mac-alt-tab-backup.*/init.lua')))
-        self.assertEqual((self.config / 'Spoons/MacAltTab.spoon/init.lua').read_bytes(),
-                         (ROOT / 'MacAltTab.spoon/init.lua').read_bytes())
+        self.assertEqual(init.read_text().count('hs.loadSpoon("FlickTab"):start()'), 1)
+        self.assertTrue(any(p.read_text() == initial for p in self.config.glob('flicktab-backup.*/init.lua')))
+        self.assertEqual((self.config / 'Spoons/FlickTab.spoon/init.lua').read_bytes(),
+                         (ROOT / 'FlickTab.spoon/init.lua').read_bytes())
 
     def test_new_config(self):
         self.run_setup()
@@ -69,7 +69,7 @@ class SetupTests(unittest.TestCase):
     def test_symlinked_spoon_not_overwritten(self):
         target = self.root / 'old.lua'
         target.write_text('-- keep\n')
-        spoon = self.config / 'Spoons/MacAltTab.spoon'
+        spoon = self.config / 'Spoons/FlickTab.spoon'
         spoon.mkdir(parents=True)
         (spoon / 'init.lua').symlink_to(target)
         self.run_setup(False)
@@ -94,7 +94,7 @@ class SetupTests(unittest.TestCase):
         self.assertFalse((self.config / 'init.lua').exists())
 
     def test_incomplete_startup_block_rejected(self):
-        (self.config / 'init.lua').write_text('-- Mac Alt-Tab Switcher\n')
+        (self.config / 'init.lua').write_text('-- FlickTab\n')
         self.run_setup(False)
         self.assertFalse((self.config / 'Spoons').exists())
 
