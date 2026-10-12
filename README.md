@@ -43,4 +43,4 @@ Allow Hammerspoon in **System Settings → Privacy & Security → Accessibility*
 | Release Command / Enter    | Switch             |
 | Escape                     | Cancel             |
 
-To uninstall, remove its startup line and `FlickTab.spoon`.
+To uninstall, remove `hs.loadSpoon("FlickTab"):start()` from `~/.hammerspoon/init.lua`, delete `~/.hammerspoon/Spoons/FlickTab.spoon`, then click **Reload Config** in the Hammerspoon menu.
